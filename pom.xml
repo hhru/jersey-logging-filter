@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ru.hh.public-pom</groupId>
+    <artifactId>public-pom</artifactId>
+    <version>1.26</version>
+  </parent>
+  <groupId>ru.hh.jersey</groupId>
+  <artifactId>jersey-logging-filter</artifactId>
+  <version>0.1-SNAPSHOT</version>
+
+  <properties>
+    <jersey.version>1.13</jersey.version>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>${jersey.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>13.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.6.1</version>
+    </dependency>
+    
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>hh-public</id>
+      <name>hh public releases repository</name>
+      <url>http://m2.hh.ru/content/repositories/public-releases</url>
+    </repository>
+    <repository>
+      <id>dev-java-net-m2</id>
+      <url>http://download.java.net/maven/2</url>
+    </repository>
+  </repositories>
+
+  <scm>
+    <connection>scm:git:git@github.com:hhru/jersey-logging-filter.git</connection>
+    <developerConnection>scm:git:git@github.com:hhru/jersey-logging-filter.git</developerConnection>
+    <url>https://github.com/hhru/jersey-logging-filter</url>
+  </scm>
+
+</project>
