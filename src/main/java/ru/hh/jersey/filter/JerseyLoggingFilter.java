@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public class JerseyLoggingFilter extends ClientFilter {
   private static final Logger log = LoggerFactory.getLogger(JerseyLoggingFilter.class);
 
-  private static final int DEFAULT_LOWER_BOUND_INVALID_RESPONSE_CODE = 400;
+  public static final int DEFAULT_LOWER_BOUND_INVALID_RESPONSE_CODE = 400;
   private int lowerBoundInvalidResponseCode = DEFAULT_LOWER_BOUND_INVALID_RESPONSE_CODE;
 
   private Set<String> restrictedHeaders = new HashSet<String>();
@@ -38,14 +38,30 @@ public class JerseyLoggingFilter extends ClientFilter {
   public JerseyLoggingFilter() { }
 
   public JerseyLoggingFilter(int lowerBoundInvalidResponseCode) {
-    this.lowerBoundInvalidResponseCode = lowerBoundInvalidResponseCode;
+    this(lowerBoundInvalidResponseCode, Collections.<String>emptySet(), Collections.<String>emptySet(), null);
+  }
+
+  public JerseyLoggingFilter(String logHeadersNameSubstr) {
+    this(DEFAULT_LOWER_BOUND_INVALID_RESPONSE_CODE, Collections.<String>emptySet(), Collections.<String>emptySet(), logHeadersNameSubstr);
+  }
+
+  public JerseyLoggingFilter(int lowerBoundInvalidResponseCode, String logHeadersNameSubstr) {
+    this(lowerBoundInvalidResponseCode, Collections.<String>emptySet(), Collections.<String>emptySet(), logHeadersNameSubstr);
+  }
+
+  public JerseyLoggingFilter(Set<String> restrictedHeaders, Set<String> restrictedParams) {
+    this(DEFAULT_LOWER_BOUND_INVALID_RESPONSE_CODE, restrictedHeaders, restrictedParams, null);
+  }
+
+  public JerseyLoggingFilter(Set<String> restrictedHeaders, Set<String> restrictedParams, String logHeadersNameSubstr) {
+    this(DEFAULT_LOWER_BOUND_INVALID_RESPONSE_CODE, restrictedHeaders, restrictedParams, logHeadersNameSubstr);
   }
 
   public JerseyLoggingFilter(
       int lowerBoundInvalidResponseCode, Set<String> restrictedHeaders, Set<String> restrictedParams, String logHeadersNameSubstr) {
     this.lowerBoundInvalidResponseCode = lowerBoundInvalidResponseCode;
-    restrictedHeaders.addAll(restrictedHeaders);
-    restrictedParams.addAll(restrictedParams);
+    this.restrictedHeaders.addAll(restrictedHeaders);
+    this.restrictedParams.addAll(restrictedParams);
     this.logHeadersNameSubstr = logHeadersNameSubstr;
   }
 
@@ -112,7 +128,7 @@ public class JerseyLoggingFilter extends ClientFilter {
       new Function<Map.Entry<String, List<String>>, String>() {
         @Override
         public String apply(Map.Entry<String, List<String>> input) {
-          return input != null ? "\"" + input.getKey() + "\"=\"" + StringUtils.join(input.getValue(), ",") + "\"" : "";
+          return input != null ? "\"" + input.getKey() + "\"=\"" + StringUtils.join(input.getValue(), ',') + "\"" : "";
         }
       });
 
