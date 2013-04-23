@@ -13,7 +13,6 @@ import org.junit.AfterClass;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,6 @@ import ru.hh.jersey.test.JerseyClientTest;
 import ru.hh.logback.ListAppender;
 
 public class JerseyLoggingFilterTest extends JerseyClientTest {
-  private static final org.slf4j.Logger testLogger = LoggerFactory.getLogger(JerseyLoggingFilterTest.class);
   private static ListAppender listAppender;
 
   @BeforeClass
@@ -38,9 +36,6 @@ public class JerseyLoggingFilterTest extends JerseyClientTest {
       listAppender.stop();
     }
   }
-
-  @Before
-  public void setUp() throws Exception { }
 
   @After
   public void resetListAppender() throws Exception {
