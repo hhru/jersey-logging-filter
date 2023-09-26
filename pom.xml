@@ -92,7 +92,7 @@
     <repository>
       <id>hh-public</id>
       <name>hh public releases repository</name>
-      <url>http://m2.hh.ru/content/repositories/public-releases</url>
+      <url>https://m2.hh.ru/content/repositories/public-releases</url>
     </repository>
     <repository>
       <id>dev-java-net-m2</id>
